@@ -5,8 +5,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    region               = "${var.aws_region}"
-    bucket               = "${var.remote_state_bucket}"
+    region               = "us-east-1"
+    bucket               = "my-app-terraform-remote-state"
     workspace_key_prefix = "/atlantis-test"
     key                  = "deployed.tfstate"
   }
