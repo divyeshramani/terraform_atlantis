@@ -3,6 +3,15 @@ provider "aws" {
   region  = "${var.aws_region}"
 }
 
+terrafrom {
+  backend "s3" {
+    region               = "${var.aws_region}"
+    bucket               = "${var.remote_state_bucket}"
+    workspace_key_prefix = "/atlantis-test"
+    key                  = "deployed.tfstate"
+  }
+}
+
 data "aws_availability_zones" "available" {}
 
 #### VPC 

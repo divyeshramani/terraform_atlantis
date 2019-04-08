@@ -1,7 +1,8 @@
 variable "aws_profile" {}
-variable "key_name" {}
-
-variable "public_key_path" {}
-
 variable "aws_region" {}
+
+variable "remote_state_bucket" {
+  default = "my-app-terraform-remote-state"
+}
+
 variable "cidr" {}
