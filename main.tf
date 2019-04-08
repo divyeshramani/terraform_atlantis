@@ -3,7 +3,7 @@ provider "aws" {
   region  = "${var.aws_region}"
 }
 
-terrafrom {
+terraform {
   backend "s3" {
     region               = "${var.aws_region}"
     bucket               = "${var.remote_state_bucket}"
