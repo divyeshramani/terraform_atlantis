@@ -4,10 +4,8 @@ resource "aws_vpc" "vpc_app" {
 }
 
 resource "aws_internet_gateway" "igw_app" {
-    vpc_id = "${aws_vpc.vpc_app.id}"
-    tags {
-        Name = "${var.env}-vpc"
-    }
+    name = "${var.env}-vpc"
+    vpc_id = "${aws_vpc.vpc_app.id}"   
 }
 
 resource "aws_route_table" "rt_public_app" {
@@ -18,7 +16,7 @@ resource "aws_route_table" "rt_public_app" {
         gateway_id = "${aws_internet_gateway.igw_app.id}"
     }
     tags {
-        Name = "${var.env}public-rt"
+        Name = "${var.env}-public-rt"
     }
 }
 
@@ -26,7 +24,7 @@ resource "aws_default_route_table" "rt_detault" {
     default_route_table_id = "${aws_vpc.vpc_app.default_route_table_id}"
 
     tags {
-        Name = "${var.env}private-rt"
+        Name = "${var.env}-private-rt"
     }
 }
 
