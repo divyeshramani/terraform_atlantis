@@ -4,11 +4,11 @@ resource "aws_vpc" "vpc_app" {
 }
 
 resource "aws_internet_gateway" "igw_app" {
-    vpc_id = "${aws_vpc.vpc_app.vpc_id}"
+    vpc_id = "${aws_vpc.vpc_app.id}"
 }
 
 resource "aws_route_table" "rt_public_app" {
-    vpc_id = "${aws_vpc.vpc_app.vpc_id}"
+    vpc_id = "${aws_vpc.vpc_app.id}"
 
     route {
         cidr_block = "0.0.0.0/0"
