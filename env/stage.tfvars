@@ -1,3 +1,5 @@
+env = "stage"
+
 aws_profile = "myaws"
 
 aws_region = "us-east-1"
