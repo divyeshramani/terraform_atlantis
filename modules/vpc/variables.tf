@@ -1,6 +1,3 @@
-variable "env" { }
+variable "env" {}
 
-variable "cidr" { }   
-
-
-
+variable "cidr" {}

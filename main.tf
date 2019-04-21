@@ -17,6 +17,6 @@ terraform {
 ### VPC 
 module "vpc" {
   source = "modules/vpc"
-  env = "${var.env}"
-  cidr = "${var.cidr}"
+  env    = "${var.env}"
+  cidr   = "${var.cidr}"
 }
