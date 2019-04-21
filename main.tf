@@ -12,29 +12,35 @@ terraform {
   }
 }
 
-data "aws_availability_zones" "available" {}
-
-#### VPC 
-resource "aws_vpc" "vpc_ans" {
-  cidr_block           = "${var.cidr}"
-  enable_dns_hostnames = true
+module "vpc" {
+  source = "modules/vpc"
+  cidr = "${var.cidr}"
 }
 
-#### Internet Gateway
-resource "aws_internet_gateway" "ig_ans" {
-  vpc_id = "${aws_vpc.vpc_ans.id}"
-}
 
-#### Route Tables
-resource "aws_route_table" "rt_public_ans" {
-  vpc_id = "${aws_vpc.vpc_ans.id}"
+# data "aws_availability_zones" "available" {}
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.ig_ans.id}"
-  }
+# #### VPC 
+# resource "aws_vpc" "vpc_ans" {
+#   cidr_block           = "${var.cidr}"
+#   enable_dns_hostnames = true
+# }
 
-  tags {
-    Name = "public"
-  }
-}
+# #### Internet Gateway
+# resource "aws_internet_gateway" "ig_ans" {
+#   vpc_id = "${aws_vpc.vpc_ans.id}"
+# }
+
+# #### Route Tables
+# resource "aws_route_table" "rt_public_ans" {
+#   vpc_id = "${aws_vpc.vpc_ans.id}"
+
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     gateway_id = "${aws_internet_gateway.ig_ans.id}"
+#   }
+
+#   tags {
+#     Name = "public"
+#   }
+# }
