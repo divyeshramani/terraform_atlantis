@@ -42,7 +42,7 @@ resource "aws_default_route_table" "rt_detault" {
 
 #create S3 VPC endpoint
 resource "aws_vpc_endpoint" "s3_endpoint-private" {
-  vpc_id       = "${aws_vpc.wp_vpc.id}"
+  vpc_id       = "${aws_vpc.vpc_app.id}"
   service_name = "com.amazonaws.${var.aws_region}.s3"
 
   route_table_ids = ["${aws_vpc.vpc_app.main_route_table_id}",
