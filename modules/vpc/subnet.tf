@@ -9,6 +9,10 @@ resource "aws_subnet" "public_subnet1_app" {
     Name = "${var.env}-public-subnet1"
   }
 }
+resource "aws_route_table_association" "public_subnet1_assoc" {
+  subnet_id      = "${aws_subnet.public_subnet1_app.id}"
+  route_table_id = "${aws_route_table.rt_public_app.id}"
+}
 
 ### Public Subnet 2
 resource "aws_subnet" "public_subnet2_app" {
@@ -21,6 +25,11 @@ resource "aws_subnet" "public_subnet2_app" {
     Name = "${var.env}-public-subnet2"
   }
 }
+resource "aws_route_table_association" "public_subnet2_assoc" {
+  subnet_id      = "${aws_subnet.public_subnet2_app.id}"
+  route_table_id = "${aws_route_table.rt_public_app.id}"
+}
+
 
 ### Private Subnet 1
 resource "aws_subnet" "private_subnet1_app" {
@@ -33,6 +42,10 @@ resource "aws_subnet" "private_subnet1_app" {
     Name = "${var.env}-private-subnet1"
   }
 }
+resource "aws_route_table_association" "private_subnet1_assoc" {
+  subnet_id      = "${aws_subnet.private_subnet1_app.id}"
+  route_table_id = "${aws_default_route_table.rt_detault.id}"
+}
 
 ### Private Subnet 1
 resource "aws_subnet" "private_subnet2_app" {
@@ -44,4 +57,8 @@ resource "aws_subnet" "private_subnet2_app" {
   tags {
     Name = "${var.env}-private-subnet2"
   }
+}
+resource "aws_route_table_association" "private_subnet2_assoc" {
+  subnet_id      = "${aws_subnet.private_subnet2_app.id}"
+  route_table_id = "${aws_default_route_table.rt_detault.id}"
 }
