@@ -7,3 +7,6 @@ variable "remote_state_bucket" {
 }
 
 variable "cidr" {}
+variable "cidrs" {
+  type = "map"
+}
