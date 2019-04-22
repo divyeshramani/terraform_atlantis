@@ -61,8 +61,4 @@ resource "aws_vpc_endpoint" "s3_endpoint-private" {
     ]
 }
 POLICY
-
-    tags {
-        Name = "${var.env}-vpc-endpoint-s3"
-    }
 }
