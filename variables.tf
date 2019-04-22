@@ -10,4 +10,4 @@ variable "cidr" {}
 variable "cidrs" {
   type = "map"
 }
-variable "internal-ips" {}
+variable "internal_ips" {}
