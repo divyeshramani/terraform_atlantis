@@ -17,6 +17,9 @@ terraform {
 ### VPC 
 module "vpc" {
   source = "modules/vpc"
+  aws_region = "${var.aws_region}"
   env    = "${var.env}"
   cidr   = "${var.cidr}"
+  cidrs  = "${var.cidrs}"
+  internal_ips = "${var.internal_ips}"
 }

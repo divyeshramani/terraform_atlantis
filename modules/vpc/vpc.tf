@@ -1,3 +1,4 @@
+### VPC
 resource "aws_vpc" "vpc_app" {
   cidr_block           = "${var.cidr}"
   enable_dns_hostnames = true
@@ -7,6 +8,7 @@ resource "aws_vpc" "vpc_app" {
   }
 }
 
+### Internet Gateway
 resource "aws_internet_gateway" "igw_app" {
   vpc_id = "${aws_vpc.vpc_app.id}"
 
@@ -15,6 +17,7 @@ resource "aws_internet_gateway" "igw_app" {
   }
 }
 
+### Public Route Table
 resource "aws_route_table" "rt_public_app" {
   vpc_id = "${aws_vpc.vpc_app.id}"
 
@@ -28,10 +31,34 @@ resource "aws_route_table" "rt_public_app" {
   }
 }
 
+### Private Route Table
 resource "aws_default_route_table" "rt_detault" {
   default_route_table_id = "${aws_vpc.vpc_app.default_route_table_id}"
 
   tags {
     Name = "${var.env}-private-rt"
   }
+}
+
+#create S3 VPC endpoint
+resource "aws_vpc_endpoint" "s3_endpoint-private" {
+  vpc_id       = "${aws_vpc.vpc_app.id}"
+  service_name = "com.amazonaws.${var.aws_region}.s3"
+
+  route_table_ids = ["${aws_vpc.vpc_app.main_route_table_id}",
+    "${aws_route_table.rt_public_app.id}",
+  ]
+
+  policy = <<POLICY
+{
+    "Statement": [
+        {
+            "Action": "*",
+            "Effect": "Allow",
+            "Resource": "*",
+            "Principal": "*"
+        }
+    ]
+}
+POLICY
 }
